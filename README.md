@@ -1,4 +1,7 @@
-<h1>Puss'n'boots</h1>
-<img src = "Assets/Images/Puss'n'boots1.jpg">
-<img src = "Assets/Images/Puss'n'boots2.jpg">
-<img src = "Assets/Images/Puss'n'boots3.jpg">
+# Кот в сапогах
+*По сюжету игры ваша задача спасти принцессу из лап злодеев. Чтобы пройти через все трудности приключения вам необходимо собирать монеты и посещать таверны для улучшения своих предметов.
+Платформа: Android, ПК.
+Жанр игры: 2D-платформер.*
+![Alt text](Assets/Images/Puss'n'boots1.jpg "Внешний вид таверны")
+![Alt text](Assets/Images/Puss'n'boots2.jpg "Внутренний вид таверны с потушенным костром")
+![Alt text](Assets/Images/Puss'n'boots3.jpg "Внутренний вид таверны с зажженым костром")
