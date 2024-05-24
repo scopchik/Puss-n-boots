@@ -5,7 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class LevelChanger : MonoBehaviour
 {
-    
     public int levelToLoad;
     public Animator anim;
     public Vector3 position;
@@ -21,7 +20,6 @@ public class LevelChanger : MonoBehaviour
         {
             SceneManager.LoadScene(levelToLoad);
             playerStorage.initialValue = position;
-            //PlayerPrefs.GetFloat("Health", GetComponent<Health>().currentHealth);
         }
     }
     public void Click()
@@ -40,6 +38,4 @@ public class LevelChanger : MonoBehaviour
     {
         anim.SetTrigger("fade");
     }
-
-    
 }
