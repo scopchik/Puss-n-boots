@@ -6,11 +6,11 @@ using UnityEngine.SceneManagement;
 
 public class PlayerMove : MonoBehaviour
 {
-    [SerializeField] private PlayerData data;
+    	[SerializeField] private PlayerData data;
 
 	#region COMPONENTS
 	public Rigidbody2D rb{get; set;}
-    public Animator anim;
+    	public Animator anim;
 	#endregion
 
 	#region STATE PARAMETERS
@@ -51,39 +51,37 @@ public class PlayerMove : MonoBehaviour
 	#region Layers & Tags
 	[Header("Layers & Tags")]
 	[SerializeField] private LayerMask _groundLayer;
-    #endregion
+    	#endregion
 
 	#region Coins
 	[Header("Coins")]
 	[SerializeField] private Text coinsTaken;
-    [SerializeField] private int coinValue;
-    public int totalCoins = 0;
+    	[SerializeField] private int coinValue;
+    	public int totalCoins = 0;
 	#endregion
 
-    private void Start()
-    {
+    	private void Start()
+    	{
 		if(PlayerPrefs.HasKey("Coins") )
-        {
-            totalCoins = PlayerPrefs.GetInt("Coins");
-            coinsTaken.text = "x " + totalCoins;
-            
-        }
+        	{
+            		totalCoins = PlayerPrefs.GetInt("Coins");
+            		coinsTaken.text = "x " + totalCoins;
+        	}
 		anim = GetComponent<Animator>();
 		rb = GetComponent<Rigidbody2D>();
 		SetGravityScale(data.gravityScale);
-
-    }
+    	}
 
 	public void OnTriggerEnter2D(Collider2D collision)
-    {
-        if(collision.gameObject.tag == "Coin")
-        {
-            Destroy(collision.gameObject);
-            TakeCoins();
-            PlayerPrefs.SetInt("Coins", totalCoins);
-            coinsTaken.text = "x " + totalCoins;
-        }
-    }
+    	{
+        	if(collision.gameObject.tag == "Coin")
+        	{
+            		Destroy(collision.gameObject);
+            		TakeCoins();
+            		PlayerPrefs.SetInt("Coins", totalCoins);
+            		coinsTaken.text = "x " + totalCoins;
+        	}
+    	}
     
 
     public void TakeCoins()
@@ -95,23 +93,20 @@ public class PlayerMove : MonoBehaviour
     {
 		anim.SetBool("run", _moveInput.x != 0);
 		#region Health
-        if(transform.position.y < data.height)
-        {
-            GetComponent<PlayerDeath>().PlayerDead();
-        }
+	        if(transform.position.y < data.height)
+	        {
+	            GetComponent<PlayerDeath>().PlayerDead();
+	        }
 		#endregion
 
-        #region INPUT HANDLER
-        _moveInput.x = Input.GetAxisRaw("Horizontal");
+	        #region INPUT HANDLER
+	        _moveInput.x = Input.GetAxisRaw("Horizontal");
 		_moveInput.y = Input.GetAxisRaw("Vertical");
-
+	
 		if(Input.GetKeyDown(KeyCode.Space))
-        {
-			_lastPressedJumpTime = data.jumpBufferTime;
-			
-        }
-		
-
+	        {
+			_lastPressedJumpTime = data.jumpBufferTime;	
+	        }
 		if (Input.GetKeyDown(KeyCode.X))
 		{
 			_lastPressedDashTime = data.dashBufferTime;
@@ -160,32 +155,32 @@ public class PlayerMove : MonoBehaviour
 			_isWallJumping = false;
 
 		if (_lastPressedJumpTime > 0 && !_isDashing)
-        {
+        	{
 			if(_lastOnGroundTime > 0)
-            {
+            		{
 				_isJumping = true;
 				_isWallJumping = false;
 				Jump();
 
-            }
+            		}
 			else if(_lastOnWallTime > 0)
-            {
+            		{
 				_isJumping = false;
 				_isWallJumping = true;
 				WallJump((_lastOnWallRightTime > 0) ? -1 : 1);
-            }
-        }
-        #endregion
+            		}
+        	}
+        	#endregion
     }
 	
 
     private void FixedUpdate()
     {
-		if(_isWallJumping)
-			Run(0);
-		else
-			Run(1);
-	}
+	if(_isWallJumping)
+		Run(0);
+	else
+		Run(1);
+    }
 
     #region MOVEMENT METHODS
     public void SetGravityScale(float scale)
