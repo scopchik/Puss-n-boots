@@ -6,7 +6,6 @@ public class EnemyPatrol : MonoBehaviour
     [SerializeField] private Transform leftEdge;
     [SerializeField] private Transform rightEdge;
 
-
     [Header ("Enemy")]
     [SerializeField] private Transform enemy;
     [SerializeField] private Transform player;
@@ -53,25 +52,20 @@ public class EnemyPatrol : MonoBehaviour
     private void ChangeDirection()
     {
         anim.SetBool("moving", false);
-
         idleTimer += Time.deltaTime;
-
-        if(idleTimer > idleDuration){
+        if(idleTimer > idleDuration)
+        {
             movingLeft = !movingLeft;
         }
         
     }
 
-    
-
     private void MoveInDirection(int _direction)
     {
         idleTimer = 0;
         anim.SetBool("moving", true); 
-        //make enemy face in direction
         enemy.localScale = new Vector3(Mathf.Abs(initScale.x) * -(_direction), 
         initScale.y, initScale.z);
-        //move
         enemy.position = new Vector3 (enemy.position.x + Time.deltaTime * _direction * speed,
         enemy.position.y, enemy.position.z);
     }
@@ -81,7 +75,9 @@ public class EnemyPatrol : MonoBehaviour
         if(movingLeft)
         {
             if(enemy.position.x >= leftEdge.position.x)
+            {
                 MoveInDirection(-1);
+            }
             else
             {
             ChangeDirection();
@@ -90,19 +86,18 @@ public class EnemyPatrol : MonoBehaviour
         else
         {
             if(enemy.position.x <= rightEdge.position.x)
+            {
                 MoveInDirection(1);
+            }
             else
             {
                 ChangeDirection();
             }
         }
-        
     }
 
     private void Angry()
     {
         transform.position = Vector2.MoveTowards(transform.position, player.position, speed * Time.deltaTime);
     }
-
-    
 }
