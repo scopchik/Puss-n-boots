@@ -4,33 +4,25 @@ using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
+    public int totalCoins = 0;
+    public VectorValue pos;
+    public float height;
+    public Animator anim;
+    
     [SerializeField] private float speed;
     [SerializeField] private float speedUp;
     [SerializeField] private float jumpPower;
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private LayerMask wallLayer;
     private Rigidbody2D body;
-    public Animator anim;
     private BoxCollider2D boxCollider;
     private float wallJumpCooldown;
     private float horizontalInput;
     [SerializeField] private float normalSpeed;
-    public float height;
     private float moveInput;
     [SerializeField] private float jump;
-
     [SerializeField] private Text coinsTaken;
     [SerializeField] private int coinValue;
-    public int totalCoins = 0;
-
-    public VectorValue pos;
-    
-    
-    private void Awake()
-    {
-        
-        
-    }
 
     void Start()
     {
@@ -40,7 +32,6 @@ public class PlayerMovement : MonoBehaviour
             coinsTaken.text = "x " + totalCoins;
             
         }
-        //transform.position = pos.initialValue; 
         body = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         boxCollider = GetComponent<BoxCollider2D>();
@@ -78,21 +69,9 @@ public class PlayerMovement : MonoBehaviour
         else if(speed < -0.01f){
             transform.localScale = new Vector3(-0.5f, 0.5f, 0.5f);
         }
-
-        
-
         anim.SetBool("run", speed != 0);
         anim.SetBool("grounded", isGrounded());
-        
-
-        
-    
-        
     }
-    // public void OnLadderUp()
-    // {
-    //     
-    // }
 
     public void OnLeftButtonDown()
     {
@@ -152,8 +131,6 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-
-
     private bool isGrounded()
     {
         RaycastHit2D raycastHit = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, 0, Vector2.down, 0.1f, groundLayer);
@@ -171,12 +148,6 @@ public class PlayerMovement : MonoBehaviour
         return horizontalInput == 0 && isGrounded() && !onWall();
     }
 
-    
-
-    
-
-    
-
     public void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.gameObject.tag == "Coin")
@@ -188,7 +159,6 @@ public class PlayerMovement : MonoBehaviour
         }
     }
     
-
     public void TakeCoins()
     {
         totalCoins += coinValue;
