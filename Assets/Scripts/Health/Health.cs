@@ -29,7 +29,6 @@ public class Health : MonoBehaviour
         bossCurrentHealth = bossStartingHealth;
         anim = GetComponent<Animator>();
         spriteRend = GetComponent<SpriteRenderer>();
-        
     }
 
     void Start()
@@ -38,7 +37,6 @@ public class Health : MonoBehaviour
         {
             currentHealth = PlayerPrefs.GetFloat("Health");
         }
-        
     }
 
     public void TakeDamage(float _damage)
@@ -47,9 +45,7 @@ public class Health : MonoBehaviour
         PlayerPrefs.SetFloat("Health", currentHealth);
         if(currentHealth > 0)
         {
-            //player hurt
             anim.SetTrigger("hurt");
-            //iframes
             StartCoroutine(Invulnerability());
         }
         else
@@ -57,19 +53,13 @@ public class Health : MonoBehaviour
             if(!dead)
             {
                 anim.SetTrigger("die");
-                
                 foreach(Behaviour component in components)
                 {
                     component.enabled = false;
                 }
-
                 dead = true;
-                
             }    
-            
         }
-        
-        
     }
 
     public void AddHealth(float _value)
