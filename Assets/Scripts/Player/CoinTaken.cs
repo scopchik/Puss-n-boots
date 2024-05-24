@@ -9,21 +9,13 @@ public class CoinTaken : MonoBehaviour
     [SerializeField] private int coinValue;
     public int totalCoins = 0;
 
-    void Awake()
-    {
-        
-    }
-
     public void Start()
     {
-        
         if(PlayerPrefs.HasKey("Coins") )
         {
             totalCoins = PlayerPrefs.GetInt("Coins");
             coinsTaken.text = "x" + totalCoins;
-            
-        }
-        
+        }   
     }
 
     public void OnTriggerEnter2D(Collider2D collision)
