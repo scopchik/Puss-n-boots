@@ -10,7 +10,6 @@ public class FireAnimBtn : MonoBehaviour
     public void Start()
     {
         btn = GetComponent<Animator>();
-        
     }
 
     public void Fire()
